@@ -1,0 +1,26 @@
+{
+    "recommendations": [
+        "formulahendry.auto-rename-tag",
+        "teabyii.ayu",
+        "wallabyjs.console-ninja",
+        "ms-vscode-remote.remote-containers",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "pkief.material-icon-theme",
+        "wallabyjs.quokka-vscode",
+        "ms-vscode.remote-repositories",
+        "wayou.vscode-todo-highlight",
+        "vscodevim.vim",
+        "wallabyjs.wallaby-extension-pack",
+        "wallabyjs.wallaby-vscode",
+        "ms-vscode-remote.remote-wsl",
+        "vivaxy.vscode-conventional-commits",
+        "github.vscode-github-actions",
+        "github.copilot",
+        "github.copilot-chat",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "gruntfuggly.todo-tree",
+        "wakatime.vscode-wakatime"
+    ]
+}

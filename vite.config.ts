@@ -1,6 +1,5 @@
 import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig, loadEnv } from "vite";
 
 declare module "@remix-run/node" {
   interface Future {
@@ -8,17 +7,15 @@ declare module "@remix-run/node" {
   }
 }
 
+const isStorybook = process.argv[1]?.includes("storybook");
+
 export default defineConfig({
   plugins: [
-    remix({
-      future: {
-        v3_fetcherPersist: true,
-        v3_relativeSplatPath: true,
-        v3_throwAbortReason: true,
-        v3_singleFetch: true,
-        v3_lazyRouteDiscovery: true,
-      },
-    }),
-    tsconfigPaths(),
+    !process.env.VITEST && !isStorybook && remix(),
   ],
+    test: {
+    environment: "happy-dom",
+    // Additionally, this is to load ".env.test" during vitest
+    env: loadEnv("test", process.cwd(), ""),
+  },
 });
