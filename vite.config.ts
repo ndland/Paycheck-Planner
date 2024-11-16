@@ -18,6 +18,8 @@ export default defineConfig({
 		// globalSetup: ['./tests/setup/global-setup.ts'],
 		restoreMocks: true,
 		coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
 			include: ['app/**/*.{ts,tsx}'],
 			all: true,
 		},
