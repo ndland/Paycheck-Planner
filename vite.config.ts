@@ -1,21 +1,25 @@
 import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig } from "vite";
 
-declare module "@remix-run/node" {
-  interface Future {
-    v3_singleFetch: true;
-  }
-}
-
-const isStorybook = process.argv[1]?.includes("storybook");
+const isStorybook = process.argv.some(arg => arg.includes("storybook"));
 
 export default defineConfig({
-  plugins: [
-    !process.env.VITEST && !isStorybook && remix(),
+  plugins: [ !process.env.VITEST && !isStorybook &&
+    remix({
+    ignoredRouteFiles: ['**/*.test.{ts,tsx}'],
+  })
+    // !process.env.VITEST && !isStorybook && remix()
   ],
-    test: {
-    environment: "happy-dom",
-    // Additionally, this is to load ".env.test" during vitest
-    env: loadEnv("test", process.cwd(), ""),
-  },
+  test: {
+    globals: true,
+		include: ['./app/**/*.test.{ts,tsx}'],
+    environment: 'jsdom',
+		// setupFiles: ['./tests/setup/setup-test-env.ts'],
+		// globalSetup: ['./tests/setup/global-setup.ts'],
+		restoreMocks: true,
+		coverage: {
+			include: ['app/**/*.{ts,tsx}'],
+			all: true,
+		},
+	},
 });
